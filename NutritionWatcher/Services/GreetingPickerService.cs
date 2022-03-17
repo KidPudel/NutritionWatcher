@@ -1,5 +1,8 @@
 ﻿namespace NutritionWatcher.Services
 {
+    /// <summary>
+    /// Service for creating greeting depending on time and name
+    /// </summary>
     public class GreetingPickerService
     {
         private string TimeGreeting { get; set; }
@@ -29,7 +32,7 @@
         public string Greeting(string Name)
         {
             SetGreetingFormat();
-            return $"{Greeting}, {Name}";
+            return $"{TimeGreeting}, {Name}";
         }
     }
 }
