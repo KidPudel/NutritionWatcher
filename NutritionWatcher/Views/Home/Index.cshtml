@@ -1,8 +1,26 @@
-﻿@{
+﻿@model NutritionWatcher.ViewModels.MainPageViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (Model.UserName == null)
+{
+    <div class="text-center form-group">
+        <form asp-action="Greeting">
+            <div class="col-md-10">
+                <strong>Your name is</strong>
+                <input type="text" asp-for="UserName"/>
+                <button type="submit" value="enter" class="btn btn-primary">enter</button>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <div class="row mt-2">
+        <h1>@Model.Greeting</h1>
+        <style>
+            body {background-color: pink}
+        </style>
+    </div>
+}
