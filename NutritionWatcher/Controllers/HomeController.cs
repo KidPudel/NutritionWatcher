@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NutritionWatcher.Models;
+using NutritionWatcher.ViewModels;
+using NutritionWatcher.Services;
 using System.Diagnostics;
 
 namespace NutritionWatcher.Controllers
@@ -8,14 +10,27 @@ namespace NutritionWatcher.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private GreetingPickerService _greetingPickerService;
+
+        private MainPageViewModel _mainPageViewModel { get; set; }
+
+        public HomeController(ILogger<HomeController> logger, GreetingPickerService greetingPickerService)
         {
             _logger = logger;
+            _greetingPickerService = greetingPickerService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string userName)
         {
-            return View();
+            _mainPageViewModel = new MainPageViewModel();
+            return View(_mainPageViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Greeting(string userName, MainPageViewModel mainPageViewModel)
+        {
+            mainPageViewModel.Greeting = _greetingPickerService.Greeting(userName);
+            return View("Index", mainPageViewModel);
         }
 
         public IActionResult Privacy()
