@@ -1,0 +1,28 @@
+﻿@model NutritionWatcher.Models.FoodFormModel
+@{
+    ViewData["Title"] = "Food form";
+}
+<form asp-action="SubmitForm">
+    <div class="col-2">
+        <div class="form-group">
+            <label asp-for="FoodName"></label>
+            <input class="form-control" type="text" asp-for="FoodName"/>
+            <span asp-validation-for="FoodName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Callories"></label>
+            <input class="form-control" type="text" asp-for="Callories"/>
+            <span asp-validation-for="Callories"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Grams"></label>
+            <input class="form-control" type="text" asp-for="Grams"/>
+            <span asp-validation-for="Grams"></span>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
