@@ -13,15 +13,21 @@
         private void SetGreetingFormat()
         {
             // current hour
-            int currentHour = DateTime.Today.Hour;
+            int currentHour = DateTime.Now.Hour;
 
             // set greeting based on time
-            if (Enumerable.Range(5, 12).Contains(currentHour))
+            if (Enumerable.Range(5, 8).Contains(currentHour))
+            {
                 TimeGreeting = "Good morning";
-            else if (Enumerable.Range(13, 16).Contains(currentHour))
+            }
+            else if (Enumerable.Range(13, 4).Contains(currentHour))
+            {
                 TimeGreeting = "Good afternoon";
+            }
             else
+            {
                 TimeGreeting = "Good evening";
+            }
         }
 
         /// <summary>
