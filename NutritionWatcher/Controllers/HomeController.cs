@@ -20,7 +20,7 @@ namespace NutritionWatcher.Controllers
             _greetingPickerService = greetingPickerService;
         }
 
-        public IActionResult Index(string userName)
+        public IActionResult Index()
         {
             _mainPageViewModel = new MainPageViewModel();
             return View(_mainPageViewModel);
@@ -32,6 +32,7 @@ namespace NutritionWatcher.Controllers
             mainPageViewModel.Greeting = _greetingPickerService.Greeting(userName);
             return View("Index", mainPageViewModel);
         }
+
 
         public IActionResult Privacy()
         {
