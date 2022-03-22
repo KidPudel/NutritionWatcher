@@ -7,27 +7,37 @@ namespace NutritionWatcher.Controllers
 {
     public class FoodController : Controller
     {
-        private FoodFormModel foodFormModel { get; set; }
+        private FoodModel _FoodModel { get; set; }
 
-        public FoodController()
+        private FoodViewModel _FoodViewModel { get; set; }
+
+        private JsonFileFoodService FoodService { get; set; }
+
+        public FoodController(JsonFileFoodService foodService)
         {
-
+            FoodService = foodService;
         }
 
+        // food form
         public IActionResult Index()
         {
-            foodFormModel = new FoodFormModel();
-            return View("FoodForm", foodFormModel);
+            _FoodModel = new FoodModel();
+            return View("FoodForm", _FoodModel);
         }
 
         [HttpPost]
-        public IActionResult SubmitForm(FoodFormModel foodForm)
+        public IActionResult SubmitForm(FoodModel foodForm)
         {
             if (!ModelState.IsValid)
             {
                 return View("FoodForm");
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ListFood()
+        {
+            return View(_FoodViewModel);
         }
     }
 }
