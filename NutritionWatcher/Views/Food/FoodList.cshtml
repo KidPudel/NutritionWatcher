@@ -1,0 +1,27 @@
+﻿@model NutritionWatcher.ViewModels.FoodViewModel
+
+@{
+    ViewData["Title"] = "FoodList";
+}
+
+<h1>FoodList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.FoodList) {
+        <tr>
+            <td>
+                @item.FoodName
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
