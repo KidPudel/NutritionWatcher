@@ -2,7 +2,7 @@
 
 namespace NutritionWatcher.Models
 {
-    public class FoodFormModel
+    public class FoodModel
     {
         [Required (AllowEmptyStrings = false, ErrorMessage = "Please enter a food name")]
         [Display(Name = "What you've eaten")]
