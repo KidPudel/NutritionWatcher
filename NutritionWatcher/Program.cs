@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<GreetingPickerService>();
+builder.Services.AddTransient<JsonFileFoodService>();
 
 var app = builder.Build();
 
