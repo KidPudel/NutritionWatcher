@@ -4,6 +4,6 @@ namespace NutritionWatcher.ViewModels
 {
     public class FoodViewModel
     {
-        public List<FoodModel> FoodList { get; set; } = new List<FoodModel>();
+        public IEnumerable<FoodModel> FoodList { get; set; } = new List<FoodModel>();
     }
 }
