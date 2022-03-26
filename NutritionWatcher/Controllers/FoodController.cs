@@ -9,7 +9,7 @@ namespace NutritionWatcher.Controllers
     {
         private FoodModel _FoodModel { get; set; }
 
-        private FoodViewModel _FoodViewModel { get; set; }
+        private FoodViewModel _FoodViewModel { get; set; } = new FoodViewModel();
 
         private JsonFileFoodService FoodService { get; set; }
 
@@ -32,11 +32,16 @@ namespace NutritionWatcher.Controllers
             {
                 return View("FoodForm");
             }
+            FoodService.AddFood(foodForm);
+
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult ListFood()
+        public IActionResult FoodList()
         {
+            var food = FoodService.GetFood();
+            _FoodViewModel.FoodList = food;
+
             return View(_FoodViewModel);
         }
     }
