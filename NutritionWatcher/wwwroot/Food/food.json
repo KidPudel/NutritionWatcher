@@ -1,0 +1,12 @@
+[
+  {
+    "FoodName": "Oat milk",
+    "Callories": 130,
+    "Grams": 100
+  },
+  {
+    "FoodName": "Peanut Butter",
+    "Callories": 300,
+    "Grams": 100
+  }
+]
