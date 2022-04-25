@@ -10,7 +10,7 @@
             <div class="col-md-10">
                 <strong>Your name is</strong>
                 <input type="text" asp-for="UserName"/>
-                <button type="submit" value="enter" class="btn btn-primary">enter</button>
+                <button type="submit" value="enter" class="btn-primary btn-primary">enter</button>
             </div>
         </form>
     </div>
@@ -23,4 +23,35 @@ else
             body {background-color: pink}
         </style>
     </div>
+
+    <div class="text-center form-group">
+        <form asp-action="RetrieveNutritionList">
+            <div class="col-md-10">
+                <strong>Number of food</strong>
+                <input type="text" asp-for="NumberOfFood"/>
+                <button type="submit" value="enter" class="btn-primary btn-primary">enter</button>
+            </div>
+        </form>
+    </div>
+}
+
+@if (Model.NutritionList != null)
+{
+        <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var food in Model.NutritionList) {
+            <tr>
+                <td>
+                    @food.description
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+
 }

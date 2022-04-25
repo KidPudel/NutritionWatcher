@@ -8,5 +8,9 @@ namespace NutritionWatcher.ViewModels
         [Required]
         public string UserName { get; set; }
         public string Greeting { get; set; }
+
+        public IEnumerable<NutritionModel> NutritionList { get; set; }
+
+        public int NumberOfFood { get; set; }
     }
 }

@@ -4,6 +4,8 @@ using NutritionWatcher.ViewModels;
 using NutritionWatcher.Services;
 using System.Diagnostics;
 
+using System.Text.Json;
+
 namespace NutritionWatcher.Controllers
 {
     public class HomeController : Controller
@@ -14,10 +16,13 @@ namespace NutritionWatcher.Controllers
 
         private MainPageViewModel _mainPageViewModel { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, GreetingPickerService greetingPickerService)
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public HomeController(ILogger<HomeController> logger, GreetingPickerService greetingPickerService, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _greetingPickerService = greetingPickerService;
+            _httpClientFactory = httpClientFactory;
         }
 
         public IActionResult Index()
@@ -30,6 +35,29 @@ namespace NutritionWatcher.Controllers
         public IActionResult Greeting(string userName, MainPageViewModel mainPageViewModel)
         {
             mainPageViewModel.Greeting = _greetingPickerService.Greeting(userName);
+            return View("Index", mainPageViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RetrieveNutritionList(int NumberOfFood, MainPageViewModel mainPageViewModel)
+        {
+            HttpClient httpClient = _httpClientFactory.CreateClient();
+
+            var requestBody = new Dictionary<string, string>();
+            requestBody.Add("pageSize", NumberOfFood.ToString());
+
+            var request = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri("https://localhost:7223/nutrition_list"),
+            };
+
+            var response = await httpClient.SendAsync(request);
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            mainPageViewModel.NutritionList = JsonSerializer.Deserialize<NutritionModel[]>(responseBody);
+
             return View("Index", mainPageViewModel);
         }
 
